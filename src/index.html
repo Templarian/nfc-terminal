@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NFC Terminal</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <style>
+    @import url('Consolas.ttf');
+    html {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+    }
+    textarea {
+      font-family: 'Consolas';
+      font-size: 1.5rem;
+      border: 0.5rem solid #111;
+      color: #FFF;
+      background: #222;
+      resize: none;
+      width: calc(100% - 3rem);
+      height: 60%; /* calc(100% - 60px); */
+      padding: 1rem;
+      outline: 0;
+    }
+    textarea:focus {
+      border-color: #333;
+    }
+    </style>
+  </head>
+  <body>
+    <textarea id="textarea"></textarea>
+    <button id="buttonFirmware">firmware</button>
+    <button id="buttonPoll">poll</button>
+    <button id="buttonWrite">write</button>
+    <button id="buttonRead">read</button>
+    <script>
+      var textarea = document.getElementById('textarea');
+      textarea.value = "Hello World!";
+      var buttonFirmware = document.getElementById('buttonFirmware');
+      buttonFirmware.addEventListener('click', () => {
+        fetch('./firmware')
+        .then(response => response.json())
+        .then(data => console.log(data));
+      });
+      var buttonRead = document.getElementById('buttonRead');
+      buttonRead.addEventListener('click', () => {
+        fetch('./read')
+        .then(response => response.json())
+        .then(data => console.log(data));
+      });
+      var buttonWrite = document.getElementById('buttonWrite');
+      buttonWrite.addEventListener('click', () => {
+        fetch('./write', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(textarea.value)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+      });
+    </script>
+  </body>
+</html>

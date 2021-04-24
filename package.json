@@ -1,0 +1,26 @@
+{
+  "name": "nfc-terminal",
+  "version": "1.0.0",
+  "description": "Vintage NFC Terminal for 1024x600 Display + Raspberry Pi 4+ PN532",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Templarian/nfc-terminal.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Templarian/nfc-terminal/issues"
+  },
+  "homepage": "https://github.com/Templarian/nfc-terminal#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ndef": "^0.2.0",
+    "open": "^8.0.6",
+    "pn532": "^1.0.0",
+    "serialport": "^9.0.7"
+  }
+}
