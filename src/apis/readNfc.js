@@ -29,6 +29,6 @@ exports.read = function () {
                 count: i++,
                 records: []
             });
-        }, 5);
+        }, 5000);
     });
 };
