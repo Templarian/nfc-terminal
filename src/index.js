@@ -12,10 +12,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/Consolas.ttf', (req, res) => {
-  res.sendFile(path.join(__dirname + '/assets/Consolas.ttf'));
-});
-
 app.get('/poll', (req, res) => {
   res.send('Hello World!');
 });
