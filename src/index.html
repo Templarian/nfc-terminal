@@ -12,8 +12,10 @@
       margin: 0;
       height: 100%;
       font-family: 'Consolas', monospace;
+      overflow: hidden;
     }
     textarea {
+      position: fixed;
       font-family: 'Consolas', monospace;
       font-size: 1.5rem;
       border-top: 0.5rem solid #111;
@@ -24,20 +26,27 @@
       background: #222;
       resize: none;
       width: calc(100% - 6rem);
-      height: calc(100% - 4.5rem);
       padding: 1rem 1rem 1rem 0.5rem;
       outline: 0;
       word-break: break-all;
       overflow: hidden;
+      /* todo: make dynamic */
+      height: 5000px;
     }
     textarea:focus {
       border-color: #333;
+    }
+    textarea + .status {
+      background: #111;
+    }
+    textarea:focus + .status {
+      background: #333;
     }
     .status {
       display: flex;
       flex-direction: row;
       bottom: 0;
-      position: absolute;
+      position: fixed;
       color: #fff;
       line-height: 2rem;
       font-size: 1.25rem;
@@ -56,6 +65,18 @@
     .status .divider {
       width: 0.5rem;
     }
+    .status::before {
+      content: ' ';
+      height: 0.5rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      background: #111;
+    }
+    textarea:focus + .status::before {
+      background: #333;
+    }
     #measure {
       position: fixed;
       top: 0;
@@ -71,13 +92,13 @@
     }
     #lines {
       position: fixed;
+      z-index: 1;
       top: 0;
       left: 0;
-      padding: 1.5rem 0 2.5rem 1rem;
+      padding: 1.5rem 0 0rem 1rem;
       font-family: 'Consolas';
       font-size: 1.5rem;
       width: 3rem;
-      height: calc(100% - 4rem);
       white-space: nowrap;
       overflow: auto;
       user-select: none;
@@ -93,11 +114,19 @@
       border-bottom: 0.5rem solid #111;
       border-left: 0.5rem solid #111;
       background: #222;
+      flex-direction: column;
     }
     #quick button {
       font-size: 1.5rem;
       padding: 0.5rem;
       border: 0;
+      text-align: left;
+      background: #222;
+      color: #fff;
+    }
+    #quick button:focus {
+      outline: 0;
+      background: #062F4A;
     }
     </style>
   </head>
@@ -159,7 +188,7 @@
       function selectLine() {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
-        const value = textarea.value.trim().replace(/\r/g, '');
+        const value = textarea.value.replace(/\r/g, '');
         const lines2 = value.split(/\n/g);
         let chars = 0;
         for (let i = 0; i < lines2.length; i++) {
@@ -175,7 +204,7 @@
       function updateRowCol() {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
-        const value = textarea.value.trim().replace(/\r/g, '');
+        const value = textarea.value.replace(/\r/g, '');
         const lines2 = value.split(/\n/g);
         let chars = 0;
         for (let i = 0; i < lines2.length; i++) {
@@ -183,6 +212,10 @@
           if (start >= chars && start <= chars + currentLine.length) {
             column.innerText = start - chars;
             row.innerText = i + 1;
+            if (i > state.rows) {
+              textarea.style.marginTop = `calc(-${linesElement.getBoundingClientRect().height}px + 1.5rem)`;
+              console.log(i + 1, start - chars);
+            }
             return;
           }
           chars += currentLine.length + 1;
@@ -191,12 +224,16 @@
       function replaceLine(callback) {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
-        const value = textarea.value.trim().replace(/\r/g, '');
+        const value = textarea.value.replace(/\r/g, '');
         const lines2 = value.split(/\n/g);
         let chars = 0;
         for (let i = 0; i < lines2.length; i++) {
           const currentLine = lines2[i];
           if (start >= chars && start <= chars + currentLine.length) {
+            const result = callback(currentLine);
+            if (!result) {
+              return;
+            }
             const { line, offset } = callback(currentLine);
             lines2[i] = line;
             textarea.value = lines2.join('\n');
@@ -217,10 +254,10 @@
         } else if (e.key === 'ArrowLeft') {
           updateRowCol();
         } else if (e.key === 'Enter') {
-          
+          // updateRowCol();
         }
       });
-      document.addEventListener('keydown', (e) => {
+      textarea.addEventListener('keydown', (e) => {
         if ((e.ctrlKey && e.key === 'a')) {
           selectLine();
           e.preventDefault();
@@ -238,6 +275,26 @@
             }
           });
           e.preventDefault();
+        } else if (e.shiftKey && e.key === 'Tab') {
+          replaceLine((line) => {
+            if (line.match(/^  /)) {
+              return {
+                line: line.slice(2),
+                offset: -2
+              };
+            }
+          });
+          e.preventDefault();
+          updateLinesChars();
+        } else if (e.key === 'Tab') {
+          replaceLine((line) => {
+            return {
+              line: `  ${line}`,
+              offset: 2
+            }
+          });
+          e.preventDefault();
+          updateLinesChars();
         } else if (e.key === 'PageLeft') {
           state.page -= state.page < 0 ? 0 : 1;
         } else if (e.key === 'PageDown') {
@@ -276,7 +333,7 @@
         }
         linesElement.innerHTML = '';
         c = state.rows;
-        for (var l = 0; l < c; l++) {
+        for (var l = 0; l <= c; l++) {
           const div = document.createElement('div');
           div.innerText = '\u00A0';
           linesElement.appendChild(div);
@@ -287,7 +344,7 @@
         //textarea.scrollTop = 0;
       });
       function updateLinesChars() {
-        const value = textarea.value.trim().replace(/\r/g, '');
+        const value = textarea.value.replace(/\r/g, '');
         const lineArr = value.split(/\n/g);
         let lineCount = 1;
         [...linesElement.children].forEach((child) => {
@@ -300,7 +357,7 @@
           const ele = linesElement.children[lines];
           if (ele) {
             if (line === '') {
-              ele.style.opacity = '0.6';
+              ele.style.opacity = '0.4';
             }
             ele.innerText = `0000${lineCount}`.slice(-3);
             lineCount += 1;
@@ -315,17 +372,18 @@
         updateLinesChars();
       });
       function updateValue(value) {
-        textarea.value = value.trim();
+        textarea.value = value;
+        calc();
         updateLinesChars();
       }
-      updateValue("Hello World!");
+      updateValue("Hello World!\n\n\n\n\n\nTest\n\n\nHmm");
       const resizeObserver = new ResizeObserver(entries => {
         const entry = entries[0];
         console.log(entry.contentRect);
         console.log('Size changed');
-        const { cols, rows } = calc();
-        document.getElementById('columns').innerText = cols;
-        document.getElementById('rows').innerText = rows;
+        // const { cols, rows } = calc();
+        // document.getElementById('columns').innerText = cols;
+        // document.getElementById('rows').innerText = rows;
       });
       resizeObserver.observe(textarea);
       var buttonFirmware = document.getElementById('buttonFirmware');

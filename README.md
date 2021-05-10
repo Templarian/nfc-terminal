@@ -40,3 +40,20 @@ The files are optimized for a SLA Resin printer.
       - Data modification is written
     - Cartridge Removed
   - Repeat Wait for Cartridge
+
+## Data
+
+All records must exist for the cartridge to be properally read.
+
+> If type is not found it is treated as new cartridge. Use a phone to reset chip.
+
+- Type (20 chars)
+  - `text`, `markdown`, `javascript`
+- Total Writes (10 chars)
+  - `42`
+- Created Date (20 chars)
+  - `2021-05-09T19:31:31Z`
+- Modified Date (20 chars)
+  - `2021-05-09T19:31:31Z`
+- Text (~2k/4k/8k - 70 chars)
+  - All text data.
