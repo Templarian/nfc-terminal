@@ -31,11 +31,12 @@ The files are optimized for a SLA Resin printer.
 
 ## NFC Lifecycle
 
+- LED Off
 - Ready
-  - Cartridge slot LED solid
+  - Cartridge slot LED Solid
   - Wait for cartridge
     - Cartridge Inserted
-      - Cartridge slot LED pulses
+      - Cartridge slot LED Pulses
       - Read cartridge data
       - Data modification is written
     - Cartridge Removed
@@ -55,5 +56,5 @@ All records must exist for the cartridge to be properally read.
   - `2021-05-09T19:31:31Z`
 - Modified Date (20 chars)
   - `2021-05-09T19:31:31Z`
-- Text (~2k/4k/8k - 70 chars)
+- Text (~2k/4k/8k minus 70 chars)
   - All text data.

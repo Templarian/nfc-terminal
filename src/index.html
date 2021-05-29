@@ -25,8 +25,8 @@
       color: #FFF;
       background: #222;
       resize: none;
-      width: calc(100% - 6rem);
-      padding: 1rem 1rem 1rem 0.5rem;
+      width: calc(100% - 5.5rem);
+      padding: 1rem 0.5rem 1rem 0.5rem;
       outline: 0;
       word-break: break-all;
       overflow: hidden;
@@ -53,7 +53,7 @@
       width: calc(100% - 1rem);
       padding-right: 1rem;
     }
-    .status .debug {
+    .status .space {
       flex: 1;
     }
     .status .details {
@@ -81,7 +81,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      padding: 1.5rem 1.5rem 2.5rem 4.5rem;
+      padding: 1.5rem 1.0rem 2.5rem 4.5rem;
       font-family: 'Consolas';
       font-size: 1.5rem;
       width: calc(100% - 6rem);
@@ -115,6 +115,7 @@
       border-left: 0.5rem solid #111;
       background: #222;
       flex-direction: column;
+      z-index: 1;
     }
     #quick button {
       font-size: 1.5rem;
@@ -135,18 +136,17 @@
       <button>Run</button>
       <button>Fullscreen</button>
       <button>Exit</button>
+      <button id="buttonFirmware">firmware</button>
+      <button id="buttonPoll">poll</button>
+      <button id="buttonWrite">write</button>
+      <button id="buttonRead">read</button>
     </div>
     <div id="measure"></div>
     <div id="lines"></div>
     <textarea id="textarea"></textarea>
     <div class="status">
-      <span class="debug">
-        <button id="buttonFirmware">firmware</button>
-        <button id="buttonPoll">poll</button>
-        <button id="buttonWrite">write</button>
-        <button id="buttonRead">read</button>
-      </span>
-      <span class="details">
+      <div class="space"></div>
+      <div class="details">
         <span class="label">Column</span>
         <span class="value" id="column">1</span>
         <span class="label">of</span>
@@ -166,16 +166,18 @@
         <span class="value" id="dataCount">10</span>
         <span class="label">of</span>
         <span class="value" id="dataTotal">842</span>
-      </span>
+      </div>
     </div>
     <script>
       const state = {
         cols: 0,
         rows: 0,
-        page: 0,
-        totalPages: 0,
+        page: 1,
+        totalPages: 1,
         count: 0,
-        total: 8000
+        total: 8000,
+        lines: {},
+        isQuickOpen: false
       };
       var linesElement = document.getElementById('lines');
       var measure = document.getElementById('measure');
@@ -184,7 +186,7 @@
       var textarea = document.getElementById('textarea');
       var dataCount = document.getElementById('dataCount');
       var quick = document.getElementById('quick');
-      var isOpen = false;
+      var pageTotal = document.getElementById('pageTotal');
       function selectLine() {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
@@ -201,6 +203,7 @@
           chars += currentLine.length + 1;
         }
       }
+      let lastLine = 1;
       function updateRowCol() {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
@@ -212,9 +215,18 @@
           if (start >= chars && start <= chars + currentLine.length) {
             column.innerText = start - chars;
             row.innerText = i + 1;
-            if (i > state.rows) {
-              textarea.style.marginTop = `calc(-${linesElement.getBoundingClientRect().height}px + 1.5rem)`;
-              console.log(i + 1, start - chars);
+            if (lastLine !== i + 1) {
+              console.log(lastLine, i + 1, i % (state.rows + 1));
+              if (lastLine > i + 1) {
+                if (i === state.rows) {
+                  textarea.style.marginTop = `0`;
+                }
+              } else if (lastLine < i + 1) {
+                if (i % (state.rows + 1) === 0) {
+                  textarea.style.marginTop = `calc(-${linesElement.getBoundingClientRect().height}px + 1.5rem)`;
+                }
+              }
+              lastLine = i + 1;
             }
             return;
           }
@@ -297,33 +309,32 @@
           updateLinesChars();
         } else if (e.key === 'PageLeft') {
           state.page -= state.page < 0 ? 0 : 1;
+          updatePage();
         } else if (e.key === 'PageDown') {
-          state.page++;
+          state.page += 1;
+          updatePage();
         } else if ((e.ctrlKey && e.key === 'p')
           || (e.ctrlKey && e.shiftKey && e.key === 'p')) {
-          quick.style.display = isOpen ? 'none' : 'flex';
-          isOpen = !isOpen;
+          quick.style.display = 'flex';
+          quick.children[0].focus();
+          state.isQuickOpen = true;
           e.stopPropagation();
           e.preventDefault();
-          quick.children[0].focus();
-        } else if (e.key === 'Escape' && isOpen) {
-          quick.style.display = 'none';
-          isOpen = false;
         }
       });
-      function calc() {
+      function calculateRowsAndColumns() {
         measure.innerText = '';
         var width = measure.scrollWidth;
         let c = 200;
         for (var w = 0; w < c; w++) {
           measure.innerText += '0';
           if (width !== measure.scrollWidth) {
-            state.cols = w + 1;
+            state.cols = w;
             break;
           }
         }
         var height = measure.scrollHeight;
-        c = 100;
+        c = 120;
         for (var h = 0; h < c; h++) {
           measure.innerText += '\n0';
           if (height !== measure.scrollHeight) {
@@ -338,12 +349,10 @@
           div.innerText = '\u00A0';
           linesElement.appendChild(div);
         }
-        return state;
+        updateLinesChars();
       }
-      textarea.addEventListener('scroll', () => {
-        //textarea.scrollTop = 0;
-      });
       function updateLinesChars() {
+        state.lines = {};
         const value = textarea.value.replace(/\r/g, '');
         const lineArr = value.split(/\n/g);
         let lineCount = 1;
@@ -351,7 +360,7 @@
           child.innerText = '\u00A0';
           child.style.opacity = '1.0';
         });
-        const result = lineArr.reduce(({ chars, lines }, line, i) => {
+        const result = lineArr.reduce(({ chars, lines, offsetLines }, line, i) => {
           chars += line.length + 1;
           // Increment for blank rows.
           const ele = linesElement.children[lines];
@@ -362,29 +371,39 @@
             ele.innerText = `0000${lineCount}`.slice(-3);
             lineCount += 1;
           }
-          lines += Math.ceil((line.length + 1) / state.cols);
-          return { chars, lines };
-        }, { chars: -1, lines: 0 });
+          const diff = Math.ceil((line.length) / state.cols);
+          lines += diff || 1;
+          // loop here baed on for i=0; i < diff; i++... set the ones before
+          state.lines[lines] = (diff || 1) + lines - 1;
+          return { chars, lines, offsetLines };
+        }, { chars: -1, lines: 0, offsetLines: 0 });
         dataCount.innerText = result.chars;
+        console.log(state.lines);
+        document.getElementById('columns').innerText = state.cols;
+        document.getElementById('rows').innerText = state.rows;
       }
       textarea.addEventListener('input', () => {
         updateRowCol();
         updateLinesChars();
       });
+      function updatePage() {
+        console.log(state.page)
+        pageTotal.innerText = state.page;
+      }
       function updateValue(value) {
         textarea.value = value;
-        calc();
+        calculateRowsAndColumns();
         updateLinesChars();
       }
-      updateValue("Hello World!\n\n\n\n\n\nTest\n\n\nHmm");
       const resizeObserver = new ResizeObserver(entries => {
         const entry = entries[0];
         console.log(entry.contentRect);
         console.log('Size changed');
-        // const { cols, rows } = calc();
-        // document.getElementById('columns').innerText = cols;
-        // document.getElementById('rows').innerText = rows;
+        calculateRowsAndColumns();
+        document.getElementById('columns').innerText = state.cols;
+        document.getElementById('rows').innerText = state.rows;
       });
+      updateValue("Hello World!\n\n\n\n\n\nTest\n\n\nHmm");
       resizeObserver.observe(textarea);
       var buttonFirmware = document.getElementById('buttonFirmware');
       buttonFirmware.addEventListener('click', () => {
@@ -409,6 +428,21 @@
         })
         .then(response => response.json())
         .then(data => console.log(data));
+      });
+      // Quick menu
+      quick.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey && e.key === 'p')
+          || (e.ctrlKey && e.shiftKey && e.key === 'p')) {
+          quick.style.display = 'none';
+          state.isQuickOpen = false;
+          textarea.focus();
+          e.stopPropagation();
+          e.preventDefault();
+        } else if (e.key === 'Escape') {
+          quick.style.display = 'none';
+          state.isQuickOpen = false;
+          textarea.focus();
+        }
       });
     </script>
   </body>
