@@ -374,7 +374,7 @@
           const diff = Math.ceil((line.length) / state.cols);
           lines += diff || 1;
           // loop here baed on for i=0; i < diff; i++... set the ones before
-          state.lines[lines] = (diff || 1) + lines - 1;
+          state.lines[lines] = (diff || 1) + state.lines[lines - 1];
           return { chars, lines, offsetLines };
         }, { chars: -1, lines: 0, offsetLines: 0 });
         dataCount.innerText = result.chars;
