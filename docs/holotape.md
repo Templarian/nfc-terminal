@@ -70,7 +70,7 @@ The Holotape requires physical hardware for a few reasons.
 
 | Part | Quantity |
 | ---- | -------- |
-| 5mm Depth 4mm Radius Magnet | 2 |
+| 5mm Depth 4mm Diameter Magnet | 2 |
 | M2.5 8mm Flat Head Screw | 2 |
 | M2.5 Nut | 2 |
 | M2 8mm Flat Head Screw | 2 |
