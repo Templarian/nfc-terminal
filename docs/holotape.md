@@ -138,7 +138,7 @@ Super glue key fob into Panel body. Placement will ensure the NFC reader will al
 
 The two smaller M2 4mm screws placed into the Main body are completely for visuals.
 
-[Insert Image Here]
+[<img src="assets/step-m2-screws.jpg">](assets/step-m2-screws.jpg)
 
 ## Final
 
