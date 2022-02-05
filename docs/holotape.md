@@ -128,7 +128,7 @@ The Holotape requires physical hardware for a few reasons.
 
 ### (Optional) Data Key Fob
 
-Super glue key fob into Main body. Placement will ensure the NFC reader will align when inserted into the slot.
+Super glue key fob into Panel body. Placement will ensure the NFC reader will align when inserted into the slot.
 
 [<img src="assets/step-key-fob-thumb.jpg">](assets/step-key-fob-thumb.jpg)
 
