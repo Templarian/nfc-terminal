@@ -16,7 +16,7 @@ Resin printing a Holotape can be done in a single print on most resin printers w
 | Main | [<img src="assets/main-thumb.jpg">](assets/main.jpg) | main.stl | main_supported.stl |
 | Panel | [<img src="assets/panel-thumb.jpg">](assets/panel.jpg) | panel.stl | panel_supported.stl |
 | Spinner Front | [<img src="assets/spinner-front-thumb.jpg">](assets/spinner-front.jpg) | spinner_front.stl | spinner_front_supported.stl |
-| Spinner Back | spinner_back.stl | spinner_back_supported.stl |
+| Spinner Back | [<img src="assets/spinner-back-thumb.jpg">](assets/spinner-back.jpg) | spinner_back.stl | spinner_back_supported.stl |
 | Slider | [<img src="assets/slider-thumb.jpg">](assets/slider.jpg) | slider.stl | slider_supported.stl |
 
 > Note: Pre-supported are highly recommended as they are setup to offer minimal sanding, but may use more resin.
