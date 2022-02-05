@@ -63,11 +63,11 @@ The process below is what worked in testing, but if you have time and different 
 **Goal:** Off white that looks like an vintage computer white.
 
 1. White Primer; 1 Coat
-2. [Dry Time 4 Hours]
+2. _[Dry Time 4 Hours]_
 3. Aged White; 2 Coats
-4. [Dry Time 4 Hours]
+4. _[Dry Time 4 Hours]_
 5. Satin Varnish; 2 to 3 Coats
-6. [Dry Time Next Day]
+6. _[Dry Time Next Day]_
 
 **Recommended:** With a hand brush paint extra varnish around slider area.
 
