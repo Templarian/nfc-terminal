@@ -132,6 +132,8 @@ Super glue key fob into Panel body. Placement will ensure the NFC reader will al
 
 [<img src="assets/step-key-fob-thumb.jpg">](assets/step-key-fob-thumb.jpg)
 
+> **Note:** Super glue to the correct side or the NFC scanner may not be able to read key fob.
+
 ### Two Screws in Main
 
 The two smaller M2 4mm screws placed into the Main body are completely for visuals.
