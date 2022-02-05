@@ -1,6 +1,6 @@
 # Holotape
 
-Design based on the [Fallout 4](https://en.wikipedia.org/wiki/Fallout_4) fictional data cartridge. To make the project easier these use NFC data key fobs, unlike tape like the name implies.
+The Holotape design is based on the [Fallout 4](https://en.wikipedia.org/wiki/Fallout_4) fictional data cartridge.
 
 > **Requirements:** This project requires a Resin printer. An airbrush is highly recommended for painting.
 
