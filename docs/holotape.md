@@ -11,8 +11,8 @@ Design based on the [Fallout 4](https://en.wikipedia.org/wiki/Fallout_4) fiction
 
 Resin printing a Holotape can be done in a single print on most resin printers with over a 6" panel.
 
-| Part | STL  | Image | Pre-Supported STL |
-| ---- | ---- | ----- | ----------------- |
+| Part | Preview | STL | Pre-Supported STL |
+| ---- | ------- | --- | ----------------- |
 | Main Body | <img src="assets/main-body-thumb.jpg"> | main.stl | main_supported.stl |
 | Label Body | label.stl | label_supported.stl |
 | Spinner Front | spinner_front.stl | spinner_front_supported.stl |
