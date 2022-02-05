@@ -130,7 +130,7 @@ The Holotape requires physical hardware for a few reasons.
 
 Super glue key fob into Main body. Placement will ensure the NFC reader will align when inserted into the slot.
 
-[Insert Image Here]
+[<img src="assets/step-key-fob-thumb.jpg">](assets/step-key-fob-thumb.jpg)
 
 ### Two Screws in Main
 
