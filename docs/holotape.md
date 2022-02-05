@@ -13,7 +13,7 @@ Resin printing a Holotape can be done in a single print on most resin printers w
 
 | Part | Preview | STL | Pre-Supported STL |
 | ---- | ------- | --- | ----------------- |
-| Main Body | <img src="assets/main-body-thumb.jpg"> | main.stl | main_supported.stl |
+| Main Body | [<img src="assets/main-body-thumb.jpg">](assets/main-body.jpg) | main.stl | main_supported.stl |
 | Label Body | label.stl | label_supported.stl |
 | Spinner Front | spinner_front.stl | spinner_front_supported.stl |
 | Spinner Back | spinner_back.stl | spinner_back_supported.stl |
