@@ -76,35 +76,35 @@ The process below is what worked in testing, but if you have time and different 
 **Goal:** By using Aluminum under Orange Fire the color will be more vibrant giving it a Sci-Fi look.
 
 1. Grey Primer; 1 Coat
-2. [Dry Time 4 Hours]
+2. _[Dry Time 4 Hours]_
 3. Dull Aluminum; 2 Coats
-4. [Dry Time 4 Hours]
+4. _[Dry Time 4 Hours]_
 5. Orange Fire; 3 Coats
-6. [Dry Time 4 Hours]
+6. _[Dry Time 4 Hours]_
 7. Satin Varnish; 2 to 3 Coats
-8. [Dry Time Next Day]
+8. _[Dry Time Next Day]_
 
 ### Spinner Front / Spinner Back
 
 **Goal:** Make it look like metal.
 
 1. Grey Primer; 1 Coat
-2. [Dry Time 4 Hours]
+2. _[Dry Time 4 Hours]_
 3. Dull Aluminum; 2 Coats
-4. [Dry Time 4 Hours]
+4. _[Dry Time 4 Hours]_
 5. Satin Varnish; 2 to 3 Coats
-6. [Dry Time Next Day]
+6. _[Dry Time Next Day]_
 
 ### Slider
 
 **Goal:** Dull'ish plain grey switch. Rotate part to ensure even fill into ridges.
 
 1. Grey Primer; 1 Coat
-2. [Dry Time 4 Hours]
+2. _[Dry Time 4 Hours]_
 3. Stonewall Grey; 2 Coats
-4. [Dry Time 4 Hours]
+4. _[Dry Time 4 Hours]_
 5. Satin Varnish; 2 to 3 Coats
-6. [Dry Time Next Day]
+6. _[Dry Time Next Day]_
 
 ## Assembly
 
