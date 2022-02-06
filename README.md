@@ -1,8 +1,16 @@
 # NFC Terminal
 
-**Goal:** Vintage cartridge computer that stores data via NFC.
+**Goal:** Vintage cartridge computer that stores data via NFC key fobs.
 
 [Image Here]
+
+## Guides
+
+| Guide | Description |
+| ----- | ----------- |
+| [Holotape](docs/holotape.md) | Step by step guide for making a Holotape cartridge. |
+| [Computer](docs/computer.md) | Step by step guide for building the computer. |
+| [FAQ](docs/faq.md) | Troubleshooting and other steps. |
 
 ## Hardware
 

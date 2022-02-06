@@ -71,7 +71,7 @@ The process below is what worked in testing, but if you have time and different 
 
 **Recommended:** With a hand brush paint extra varnish around slider area.
 
-### Panel Body
+### Panel (or Label) Body
 
 **Goal:** By using Aluminum under Orange Fire the color will be more vibrant giving it a Sci-Fi look.
 
@@ -134,11 +134,37 @@ Super glue key fob into Panel body. Placement will ensure the NFC reader will al
 
 > **Note:** Super glue to the correct side or the NFC scanner may not be able to read key fob.
 
-### Two Screws in Main
+### Visual Screws in Panel
 
-The two smaller M2 4mm screws placed into the Main body are completely for visuals.
+The two smaller M2 4mm screws placed into the Panel body are completely for visuals.
 
-[<img src="assets/step-m2-screws.jpg">](assets/step-m2-screws.jpg)
+[<img src="assets/step-m2-screws-thumb.jpg">](assets/step-m2-screws-thumb.jpg)
+
+### Slider Magnets
+
+Two 4mm (diameter) by 5mm (depth) circle neodymium magnets are used to allow the slider to snap closed. Ensure magnets are pulling toward one another prior to assembly.
+
+> **Note:** Cheaper non-neodymium magnets may not be strong enough for the slider to function. Look for N45+ strength.
+
+[<img src="assets/step-magnets-thumb.jpg">](assets/step-magnets-thumb.jpg)
+
+After inserting magnets carefully push Slider into the Main body. This require light force, but try not to scratch the paint or break slider.
+
+Ensure the slider works before proceeding.
+
+### Main Body and Panel Body
+
+Using the M2.5 screws and M2.5 nuts assemble the two main parts together.
+
+[Insert Image Here]
+
+### Spinner
+
+The spinner is last as it often requires sanding to ensure a smooth operation.
+
+Using the M2 nut and M2x8mm screw connect both halves of the spinner. This may require trial and error so do not fully tighten until the parts spin freely.
+
+[Insert Image Here]
 
 ## Final
 
