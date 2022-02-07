@@ -35,10 +35,6 @@ Really tried to keep this as basic as possible.
 - Plain HTML + JS + CSS... one `index.html` file.
 - `Consolas` is assumed to be installed.
 
-## Shell
-
-The files are optimized for a SLA Resin printer.
-
 ## NFC Lifecycle
 
 - LED Off
@@ -56,7 +52,7 @@ The files are optimized for a SLA Resin printer.
 
 All records must exist for the cartridge to be properally read.
 
-> If type is not found it is treated as new cartridge. Use a phone to reset chip.
+> If `type` is not found it is treated as new cartridge. Use a phone to reset chip.
 
 - Type (20 chars)
   - `text`, `markdown`, `javascript`
