@@ -27,7 +27,7 @@ Resin printing a Holotape can be done in a single print on most resin printers w
 
 ## Sanding
 
-With 800 grit sand paper carefully wet sand the surfaces of the part including down any support locations.
+With 800 grit sand paper carefully wet sand the surfaces of the part.
 
 > For pre-supported models focus on the connecting points between the main body and label.
 
