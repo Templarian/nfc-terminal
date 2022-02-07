@@ -158,7 +158,7 @@ Ensure the slider works before proceeding.
 
 Using the M2.5 screws and M2.5 nuts assemble the two main parts together.
 
-[Insert Image Here]
+[<img src="assets/step-main-panel-thumb.jpg" width="480">](assets/step-main-panel-thumb.jpg)
 
 ### Spinner
 
