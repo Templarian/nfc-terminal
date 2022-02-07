@@ -12,11 +12,11 @@ Resin printing a Holotape can be done in a single print on most resin printers w
 
 | Part | Preview | STL |
 | ---- | ------- | --- |
-| Main | [<img src="assets/main-thumb.jpg" width="480">](assets/main.jpg) | main.stl<br>main_supported.stl |
-| Panel | [<img src="assets/panel-thumb.jpg" width="480">](assets/panel.jpg) | panel.stl<br>panel_supported.stl |
-| Spinner Front | [<img src="assets/spinner-front-thumb.jpg" width="480">](assets/spinner-front.jpg) | spinner_front.stl<br>spinner_front_supported.stl |
-| Spinner Back | [<img src="assets/spinner-back-thumb.jpg" width="480">](assets/spinner-back.jpg) | spinner_back.stl<br>spinner_back_supported.stl |
-| Slider | [<img src="assets/slider-thumb.jpg" width="480">](assets/slider.jpg) | slider.stl<br>slider_supported.stl |
+| Main | [<img src="assets/main-thumb.jpg" width="480">](assets/main.jpg) | main.stl<br>(supported) |
+| Panel | [<img src="assets/panel-thumb.jpg" width="480">](assets/panel.jpg) | panel.stl<br>(supported) |
+| Spinner Front | [<img src="assets/spinner-front-thumb.jpg" width="480">](assets/spinner-front.jpg) | spinner_front.stl<br>(supported) |
+| Spinner Back | [<img src="assets/spinner-back-thumb.jpg" width="480">](assets/spinner-back.jpg) | spinner_back.stl<br>(supported) |
+| Slider | [<img src="assets/slider-thumb.jpg" width="480">](assets/slider.jpg) | slider.stl<br>(supported) |
 
 > Note: Pre-supported are highly recommended as they are setup to offer minimal sanding, but may use more resin.
 
