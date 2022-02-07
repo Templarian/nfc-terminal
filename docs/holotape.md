@@ -10,6 +10,8 @@ The Holotape design is based on the [Fallout 4](https://en.wikipedia.org/wiki/Fa
 
 Resin printing a Holotape can be done in a single print on most resin printers with over a 6" panel.
 
+For cartridges needing a larger label the Label variant of the Panel can be used.
+
 | Part | Preview | STL |
 | ---- | ------- | --- |
 | Main | [<img src="assets/main-thumb.jpg" width="480">](assets/main.jpg) | main.stl<br>(supported) |
