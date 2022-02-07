@@ -2,9 +2,9 @@
 
 The Holotape design is based on the [Fallout 4](https://en.wikipedia.org/wiki/Fallout_4) fictional data cartridge.
 
-> **Requirements:** This project requires a Resin printer. An airbrush is highly recommended for painting.
-
 [<img src="assets/holotape-thumb.jpg" width="480">](assets/holotape.jpg)
+
+> **Requirements:** This project requires a Resin printer. An airbrush is highly recommended for painting.
 
 ## Printing
 
@@ -168,6 +168,8 @@ Using the M2 nut and M2x8mm screw connect both halves of the spinner. This may r
 
 [Insert Image Here]
 
-## Final
+## Done
 
-[Insert Image Here]
+If you ran into any problems submit an issue using the issue tab. Would love to see the completed Holotape `@templarian` on Twitter.
+
+Next construct the [computer](computer.md).
