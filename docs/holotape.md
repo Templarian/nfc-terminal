@@ -61,7 +61,7 @@ The process below is what worked in testing, but if you have time and different 
 | Vallejo Satin Varnish | Any Satin Varnish |
 | Vallejo Airbrush Thinner | Water |
 
-> Note: Do not forget to thin the Satin Varnish with thinner for an even coat. Or paint it on.
+> Note: Do not forget to thin the Satin Varnish with thinner for an even coat. Or paint it on with a brush.
 
 ### Main Body
 
