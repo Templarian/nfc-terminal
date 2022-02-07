@@ -12,7 +12,7 @@
 | ----- | ----------- |
 | [Holotape](docs/holotape.md) | Step by step guide for making a Holotape cartridge. |
 | [Computer](docs/computer.md) | Step by step guide for building the computer. |
-| [FAQ](docs/faq.md) | Troubleshooting and other steps. |
+| [FAQ](docs/faq.md) | Troubleshooting and general answers. |
 
 ## Hardware
 
