@@ -16,7 +16,7 @@ For cartridges needing a larger label the Label variant of the Panel can be used
 | ---- | ------- | --- |
 | Main | [<img src="assets/main-thumb.jpg" width="480">](assets/main.jpg) | main.stl<br>(supported) |
 | Panel | [<img src="assets/panel-thumb.jpg" width="480">](assets/panel.jpg) | panel.stl<br>(supported) |
-| Label | [<img src="assets/label-thumb.jpg" width="480">](assets/label.jpg) | label.stl<br>(supported) |
+| Label<br>(Panel Variant) | [<img src="assets/label-thumb.jpg" width="480">](assets/label.jpg) | label.stl<br>(supported) |
 | Spinner Front | [<img src="assets/spinner-front-thumb.jpg" width="480">](assets/spinner-front.jpg) | spinner_front.stl<br>(supported) |
 | Spinner Back | [<img src="assets/spinner-back-thumb.jpg" width="480">](assets/spinner-back.jpg) | spinner_back.stl<br>(supported) |
 | Slider | [<img src="assets/slider-thumb.jpg" width="480">](assets/slider.jpg) | slider.stl<br>(supported) |
