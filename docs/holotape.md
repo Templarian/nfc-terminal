@@ -4,6 +4,8 @@ The Holotape design is based on the [Fallout 4](https://en.wikipedia.org/wiki/Fa
 
 > **Requirements:** This project requires a Resin printer. An airbrush is highly recommended for painting.
 
+[<img src="assets/holotape-thumb.jpg">](assets/holotape.jpg)
+
 ## Printing
 
 Resin printing a Holotape can be done in a single print on most resin printers with over a 6" panel.
