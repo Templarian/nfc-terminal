@@ -2,7 +2,9 @@
 
 **Goal:** Vintage cartridge computer that stores data via NFC key fobs.
 
-[Image Here]
+| Holotape | Computer |
+| -------- | -------- |
+| [<img src="docs/assets/holotape-thumb.jpg" width="480">](docs/assets/holotape.jpg) | ... |
 
 ## Guides
 
