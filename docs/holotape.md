@@ -166,7 +166,7 @@ The spinner is last as it often requires sanding to ensure a smooth operation.
 
 Using the M2 nut and M2x8mm screw connect both halves of the spinner. This may require trial and error so do not fully tighten until the parts spin freely.
 
-[Insert Image Here]
+[<img src="assets/step-spinner-thumb.jpg" width="480">](assets/step-spinner-thumb.jpg)
 
 ## Done
 
