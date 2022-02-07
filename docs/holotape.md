@@ -4,7 +4,7 @@ The Holotape design is based on the [Fallout 4](https://en.wikipedia.org/wiki/Fa
 
 > **Requirements:** This project requires a Resin printer. An airbrush is highly recommended for painting.
 
-[<img src="assets/holotape-thumb.jpg">](assets/holotape.jpg)
+[<img src="assets/holotape-thumb.jpg" width="480">](assets/holotape.jpg)
 
 ## Printing
 
@@ -12,11 +12,11 @@ Resin printing a Holotape can be done in a single print on most resin printers w
 
 | Part | Preview | STL | Pre-Supported STL |
 | ---- | ------- | --- | ----------------- |
-| Main | [<img src="assets/main-thumb.jpg">](assets/main.jpg) | main.stl | main_supported.stl |
-| Panel | [<img src="assets/panel-thumb.jpg">](assets/panel.jpg) | panel.stl | panel_supported.stl |
-| Spinner Front | [<img src="assets/spinner-front-thumb.jpg">](assets/spinner-front.jpg) | spinner_front.stl | spinner_front_supported.stl |
-| Spinner Back | [<img src="assets/spinner-back-thumb.jpg">](assets/spinner-back.jpg) | spinner_back.stl | spinner_back_supported.stl |
-| Slider | [<img src="assets/slider-thumb.jpg">](assets/slider.jpg) | slider.stl | slider_supported.stl |
+| Main | [<img src="assets/main-thumb.jpg" width="480">](assets/main.jpg) | main.stl | main_supported.stl |
+| Panel | [<img src="assets/panel-thumb.jpg" width="480">](assets/panel.jpg) | panel.stl | panel_supported.stl |
+| Spinner Front | [<img src="assets/spinner-front-thumb.jpg" width="480">](assets/spinner-front.jpg) | spinner_front.stl | spinner_front_supported.stl |
+| Spinner Back | [<img src="assets/spinner-back-thumb.jpg" width="480">](assets/spinner-back.jpg) | spinner_back.stl | spinner_back_supported.stl |
+| Slider | [<img src="assets/slider-thumb.jpg" width="480">](assets/slider.jpg) | slider.stl | slider_supported.stl |
 
 > Note: Pre-supported are highly recommended as they are setup to offer minimal sanding, but may use more resin.
 
@@ -132,7 +132,7 @@ The Holotape requires physical hardware for a few reasons.
 
 Super glue key fob into Panel body. Placement will ensure the NFC reader will align when inserted into the slot.
 
-[<img src="assets/step-key-fob-thumb.jpg">](assets/step-key-fob-thumb.jpg)
+[<img src="assets/step-key-fob-thumb.jpg" width="480">](assets/step-key-fob-thumb.jpg)
 
 > **Note:** Super glue to the correct side or the NFC scanner may not be able to read key fob.
 
@@ -140,7 +140,7 @@ Super glue key fob into Panel body. Placement will ensure the NFC reader will al
 
 The two smaller M2 4mm screws placed into the Panel body are completely for visuals.
 
-[<img src="assets/step-m2-screws-thumb.jpg">](assets/step-m2-screws-thumb.jpg)
+[<img src="assets/step-m2-screws-thumb.jpg" width="480">](assets/step-m2-screws-thumb.jpg)
 
 ### Slider Magnets
 
@@ -148,7 +148,7 @@ Two 4mm (diameter) by 5mm (depth) circle neodymium magnets are used to allow the
 
 > **Note:** Cheaper non-neodymium magnets may not be strong enough for the slider to function. Look for N45+ strength.
 
-[<img src="assets/step-magnets-thumb.jpg">](assets/step-magnets-thumb.jpg)
+[<img src="assets/step-magnets-thumb.jpg" width="480">](assets/step-magnets-thumb.jpg)
 
 After inserting magnets carefully push Slider into the Main body. This require light force, but try not to scratch the paint or break slider.
 
