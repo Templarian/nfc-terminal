@@ -41,7 +41,7 @@ To ensure adhesion of the primer.
 
 ## Painting
 
-This is the most difficult part and requires the most time to ensure quality.
+Painting is the most difficult part and requires the most time to ensure quality.
 
 The process below is what worked in testing, but if you have time and different paints you can probably get similar results. An airbrush is preferred for smoother consistent layers.
 
