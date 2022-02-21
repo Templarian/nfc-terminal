@@ -12,16 +12,20 @@
 | ----- | ----------- |
 | [Holotape](docs/holotape.md) | Step by step guide for making a Holotape cartridge. |
 | [Computer](docs/computer.md) | Step by step guide for building the computer. |
+| [Software](docs/software.md) | Customization / development instructions. |
 | [FAQ](docs/faq.md) | Troubleshooting and general answers. |
 
 ## Hardware
 
-- Raspberry Pi 3 or better
-  - Tested on Raspberry Pi 4
+- Raspberry Pi Zero 2 W
 - PN532 Chip
   - https://www.amazon.com/gp/product/B01I1J17LC/
   - You do need to solder the 4 pins to the board.
   - UART works best as the node-i2c library is not complete
+- 1024x768 8" HDMI Non-Touch Display.
+  - https://chicagodist.com/products/hdmi-8-ips-lcd-screen-kit-1024x768
+- 1024x768 8" HDMI Touch Display.
+  - ???
 - 1024x600 7" HDMI Display.
   - https://www.amazon.com/gp/product/B07Y889J3X/
 - MIFARE DESFire EV1 2k/4k/8k Fobs
@@ -52,11 +56,11 @@ Really tried to keep this as basic as possible.
 
 All records must exist for the cartridge to be properally read.
 
-> If `type` is not found it is treated as new cartridge. Use a phone to reset chip.
+> All 5 records are written in order.
 
-- Type (20 chars)
-  - `text`, `markdown`, `javascript`
-- Total Writes (10 chars)
+- Type
+  - `text`
+- Total Writes
   - `42`
 - Created Date (20 chars)
   - `2021-05-09T19:31:31Z`

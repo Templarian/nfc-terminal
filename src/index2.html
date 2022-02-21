@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NFC Terminal</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <style>
+    html {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+      font-family: 'Consolas', monospace;
+      overflow: hidden;
+    }
+    textarea {
+      position: fixed;
+      font-family: 'Consolas', monospace;
+      font-size: 1.5rem;
+      border-top: 0.5rem solid #111;
+      border-right: 0.5rem solid #111;
+      border-bottom: 2rem solid #111;
+      border-left: 4rem solid #111;
+      color: #FFF;
+      background: #222;
+      resize: none;
+      width: calc(100% - 5.5rem);
+      padding: 1rem 0.5rem 1rem 0.5rem;
+      outline: 0;
+      word-break: break-all;
+      overflow: hidden;
+      /* todo: make dynamic */
+      height: 5000px;
+    }
+    textarea:focus {
+      border-color: #333;
+    }
+    textarea + .status {
+      background: #111;
+    }
+    textarea:focus + .status {
+      background: #333;
+    }
+    .status {
+      display: flex;
+      flex-direction: row;
+      bottom: 0;
+      position: fixed;
+      color: #fff;
+      line-height: 2rem;
+      font-size: 1.25rem;
+      width: calc(100% - 1rem);
+      padding-right: 1rem;
+    }
+    .status .space {
+      flex: 1;
+    }
+    .status .details {
+      line-height: 2rem;
+    }
+    .status .label {
+      color: #AAA;
+    }
+    .status .divider {
+      width: 0.5rem;
+    }
+    .status::before {
+      content: ' ';
+      height: 0.5rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      background: #111;
+    }
+    textarea:focus + .status::before {
+      background: #333;
+    }
+    #measure {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1.5rem 1.0rem 2.5rem 4.5rem;
+      font-family: 'Consolas';
+      font-size: 1.5rem;
+      width: calc(100% - 6rem);
+      height: calc(100% - 4rem);
+      white-space: nowrap;
+      overflow: auto;
+      z-index: -1;
+    }
+    #lines {
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      padding: 1.5rem 0 0rem 1rem;
+      font-family: 'Consolas';
+      font-size: 1.5rem;
+      width: 3rem;
+      white-space: nowrap;
+      overflow: auto;
+      user-select: none;
+      color: #aaa;
+    }
+    #quick {
+      display: none;
+      position: absolute;
+      width: 50%;
+      left: 25%;
+      top: 0;
+      border-right: 0.5rem solid #111;
+      border-bottom: 0.5rem solid #111;
+      border-left: 0.5rem solid #111;
+      background: #222;
+      flex-direction: column;
+      z-index: 1;
+    }
+    #quick button {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      border: 0;
+      text-align: left;
+      background: #222;
+      color: #fff;
+    }
+    #quick button:focus {
+      outline: 0;
+      background: #062F4A;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="quick">
+      <button>Run</button>
+      <button>Fullscreen</button>
+      <button>Exit</button>
+      <button id="buttonFirmware">firmware</button>
+      <button id="buttonPoll">poll</button>
+      <button id="buttonWrite">write</button>
+      <button id="buttonRead">read</button>
+    </div>
+    <div id="measure"></div>
+    <div id="lines"></div>
+    <textarea id="textarea"></textarea>
+    <div class="status">
+      <div class="space"></div>
+      <div class="details">
+        <span class="label">Column</span>
+        <span class="value" id="column">1</span>
+        <span class="label">of</span>
+        <span class="value" id="columns">100</span>
+        <span class="divider">&nbsp;</span>
+        <span class="label">Row</span>
+        <span class="value" id="row">1</span>
+        <span class="label">of</span>
+        <span class="value" id="rows">100</span>
+        <span class="divider">&nbsp;</span>
+        <span class="label">Page</span>
+        <span class="value" id="pageCount">1</span>
+        <span class="label">of</span>
+        <span class="value" id="pageTotal">1</span>
+        <span class="divider">&nbsp;</span>
+        <span class="label">Data</span>
+        <span class="value" id="dataCount">10</span>
+        <span class="label">of</span>
+        <span class="value" id="dataTotal">842</span>
+      </div>
+    </div>
+    <script>
+      const state = {
+        cols: 0,
+        rows: 0,
+        page: 1,
+        totalPages: 1,
+        count: 0,
+        total: 8000,
+        lines: {},
+        isQuickOpen: false
+      };
+      var linesElement = document.getElementById('lines');
+      var measure = document.getElementById('measure');
+      var column = document.getElementById('column');
+      var row = document.getElementById('row');
+      var textarea = document.getElementById('textarea');
+      var dataCount = document.getElementById('dataCount');
+      var quick = document.getElementById('quick');
+      var pageTotal = document.getElementById('pageTotal');
+      function selectLine() {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const value = textarea.value.replace(/\r/g, '');
+        const lines2 = value.split(/\n/g);
+        let chars = 0;
+        for (let i = 0; i < lines2.length; i++) {
+          const currentLine = lines2[i];
+          if (start >= chars && start <= chars + currentLine.length) {
+            textarea.selectionStart = chars;
+            textarea.selectionEnd = chars + currentLine.length;
+            return;
+          }
+          chars += currentLine.length + 1;
+        }
+      }
+      let lastLine = 1;
+      function updateRowCol() {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const value = textarea.value.replace(/\r/g, '');
+        const lines2 = value.split(/\n/g);
+        let chars = 0;
+        for (let i = 0; i < lines2.length; i++) {
+          const currentLine = lines2[i];
+          if (start >= chars && start <= chars + currentLine.length) {
+            column.innerText = start - chars;
+            row.innerText = i + 1;
+            if (lastLine !== i + 1) {
+              console.log(lastLine, i + 1, i % (state.rows + 1));
+              if (lastLine > i + 1) {
+                if (i === state.rows) {
+                  textarea.style.marginTop = `0`;
+                }
+              } else if (lastLine < i + 1) {
+                if (i % (state.rows + 1) === 0) {
+                  textarea.style.marginTop = `calc(-${linesElement.getBoundingClientRect().height}px + 1.5rem)`;
+                }
+              }
+              lastLine = i + 1;
+            }
+            return;
+          }
+          chars += currentLine.length + 1;
+        }
+      }
+      function replaceLine(callback) {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const value = textarea.value.replace(/\r/g, '');
+        const lines2 = value.split(/\n/g);
+        let chars = 0;
+        for (let i = 0; i < lines2.length; i++) {
+          const currentLine = lines2[i];
+          if (start >= chars && start <= chars + currentLine.length) {
+            const result = callback(currentLine);
+            if (!result) {
+              return;
+            }
+            const { line, offset } = callback(currentLine);
+            lines2[i] = line;
+            textarea.value = lines2.join('\n');
+            textarea.selectionStart = start + offset;
+            textarea.selectionEnd = end + offset;
+            return;
+          }
+          chars += currentLine.length + 1;
+        }
+      }
+      document.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowUp') {
+          updateRowCol();
+        } else if (e.key === 'ArrowRight') {
+          updateRowCol();
+        } else if (e.key === 'ArrowDown') {
+          updateRowCol();
+        } else if (e.key === 'ArrowLeft') {
+          updateRowCol();
+        } else if (e.key === 'Enter') {
+          // updateRowCol();
+        }
+      });
+      textarea.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey && e.key === 'a')) {
+          selectLine();
+          e.preventDefault();
+        } else if (e.ctrlKey && e.key === 'h') {
+          replaceLine((line) => {
+            if (line.match(/^# /)) {
+              return {
+                line: line.slice(2),
+                offset: -2
+              };
+            }
+            return {
+              line: `# ${line}`,
+              offset: 2
+            }
+          });
+          e.preventDefault();
+        } else if (e.shiftKey && e.key === 'Tab') {
+          replaceLine((line) => {
+            if (line.match(/^  /)) {
+              return {
+                line: line.slice(2),
+                offset: -2
+              };
+            }
+          });
+          e.preventDefault();
+          updateLinesChars();
+        } else if (e.key === 'Tab') {
+          replaceLine((line) => {
+            return {
+              line: `  ${line}`,
+              offset: 2
+            }
+          });
+          e.preventDefault();
+          updateLinesChars();
+        } else if (e.key === 'PageLeft') {
+          state.page -= state.page < 0 ? 0 : 1;
+          updatePage();
+        } else if (e.key === 'PageDown') {
+          state.page += 1;
+          updatePage();
+        } else if ((e.ctrlKey && e.key === 'p')
+          || (e.ctrlKey && e.shiftKey && e.key === 'p')) {
+          quick.style.display = 'flex';
+          quick.children[0].focus();
+          state.isQuickOpen = true;
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      });
+      function calculateRowsAndColumns() {
+        measure.innerText = '';
+        var width = measure.scrollWidth;
+        let c = 200;
+        for (var w = 0; w < c; w++) {
+          measure.innerText += '0';
+          if (width !== measure.scrollWidth) {
+            state.cols = w;
+            break;
+          }
+        }
+        var height = measure.scrollHeight;
+        c = 120;
+        for (var h = 0; h < c; h++) {
+          measure.innerText += '\n0';
+          if (height !== measure.scrollHeight) {
+            state.rows = h + 1;
+            break;
+          }
+        }
+        linesElement.innerHTML = '';
+        c = state.rows;
+        for (var l = 0; l <= c; l++) {
+          const div = document.createElement('div');
+          div.innerText = '\u00A0';
+          linesElement.appendChild(div);
+        }
+        updateLinesChars();
+      }
+      function updateLinesChars() {
+        state.lines = {};
+        const value = textarea.value.replace(/\r/g, '');
+        const lineArr = value.split(/\n/g);
+        let lineCount = 1;
+        [...linesElement.children].forEach((child) => {
+          child.innerText = '\u00A0';
+          child.style.opacity = '1.0';
+        });
+        const result = lineArr.reduce(({ chars, lines, offsetLines }, line, i) => {
+          chars += line.length + 1;
+          // Increment for blank rows.
+          const ele = linesElement.children[lines];
+          if (ele) {
+            if (line === '') {
+              ele.style.opacity = '0.4';
+            }
+            ele.innerText = `0000${lineCount}`.slice(-3);
+            lineCount += 1;
+          }
+          const diff = Math.ceil((line.length) / state.cols);
+          lines += diff || 1;
+          // loop here baed on for i=0; i < diff; i++... set the ones before
+          state.lines[lines] = (diff || 1) + state.lines[lines - 1];
+          return { chars, lines, offsetLines };
+        }, { chars: -1, lines: 0, offsetLines: 0 });
+        dataCount.innerText = result.chars;
+        console.log(state.lines);
+        document.getElementById('columns').innerText = state.cols;
+        document.getElementById('rows').innerText = state.rows;
+      }
+      textarea.addEventListener('input', () => {
+        updateRowCol();
+        updateLinesChars();
+      });
+      function updatePage() {
+        console.log(state.page)
+        pageTotal.innerText = state.page;
+      }
+      function updateValue(value) {
+        textarea.value = value;
+        calculateRowsAndColumns();
+        updateLinesChars();
+      }
+      const resizeObserver = new ResizeObserver(entries => {
+        const entry = entries[0];
+        console.log(entry.contentRect);
+        console.log('Size changed');
+        calculateRowsAndColumns();
+        document.getElementById('columns').innerText = state.cols;
+        document.getElementById('rows').innerText = state.rows;
+      });
+      updateValue("Hello World!\n\n\n\n\n\nTest\n\n\nHmm");
+      resizeObserver.observe(textarea);
+      var buttonFirmware = document.getElementById('buttonFirmware');
+      buttonFirmware.addEventListener('click', () => {
+        fetch('./firmware')
+        .then(response => response.json())
+        .then(data => console.log(data));
+      });
+      var buttonRead = document.getElementById('buttonRead');
+      buttonRead.addEventListener('click', () => {
+        fetch('./read')
+        .then(response => response.json())
+        .then(data => console.log(data));
+      });
+      var buttonWrite = document.getElementById('buttonWrite');
+      buttonWrite.addEventListener('click', () => {
+        fetch('./write', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(textarea.value)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+      });
+      // Quick menu
+      quick.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey && e.key === 'p')
+          || (e.ctrlKey && e.shiftKey && e.key === 'p')) {
+          quick.style.display = 'none';
+          state.isQuickOpen = false;
+          textarea.focus();
+          e.stopPropagation();
+          e.preventDefault();
+        } else if (e.key === 'Escape') {
+          quick.style.display = 'none';
+          state.isQuickOpen = false;
+          textarea.focus();
+        }
+      });
+    </script>
+  </body>
+</html>

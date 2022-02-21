@@ -8,6 +8,10 @@ const { firmware, read, write } = require('./apis');
 // Parse JSON
 app.use(express.json({ strict: false }));
 
+// Static Files
+app.use('/assets', express.static('src/assets'));
+app.use('/modules', express.static('src/modules'));
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
