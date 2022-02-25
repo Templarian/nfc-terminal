@@ -172,7 +172,6 @@ export default class Terminal {
     _text = '';
     set text(value) {
         this._text = value;
-        this.render();
     }
     get text() {
         return this._text;
@@ -509,5 +508,14 @@ export default class Terminal {
         c.drawImage(z, x - zWidth - 20, y + 48, zWidth, zHeight);
         c.globalAlpha = 1;
         c.drawImage(z, x + zWidth + 20, y - 48, zWidth, zHeight);
+    }
+
+    _close = null;
+    /**
+     * Listen for cartridge removal.
+     * @param {Function} callback Called on removal of cartridge.
+     */
+    onClose(callback) {
+        this._close = callback;
     }
 }

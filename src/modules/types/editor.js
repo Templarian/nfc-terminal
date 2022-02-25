@@ -9,4 +9,8 @@ export default function(terminal) {
         text
     } = terminal;
     console.log(text);
+
+    terminal.onClose(() => {
+        console.log('Run Cleanup');
+    });
 }
