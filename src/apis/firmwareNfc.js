@@ -10,6 +10,7 @@ exports.firmware = function () {
         rfid.on('ready', function() {
             rfid.getFirmwareVersion().then(function(data) {
                 console.log('firmware: ', data);
+                resolve(data);
             });
         });
     });
