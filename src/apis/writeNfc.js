@@ -1,8 +1,8 @@
 const pn532 = require('pn532');
 const SerialPort = require('serialport');
 const ndef = require('ndef');
-const { writeFile } = require('fs');
-const { exec } = require('child_process');
+const { writeFileSync } = require('fs');
+const { execSync } = require('child_process');
 
 const { connection, baudRate } = require('./../config');
 
@@ -53,12 +53,10 @@ function toData(records) {
 exports.write = function (records) {
   return new Promise((resolve, reject) => {
     // create file
-    writeFile('write', toData(records));
-    exec('mifare-desfire-write-ndef -i write -y', (error, stdout, stderr) => {
-      resolve({ error, stdout, stderr });
-    });
-  
-    resolve();
+    writeFileSync('write', toData(records));
+    const stdout = execSync('mifare-desfire-write-ndef -i write -y');
+    
+    resolve(stdout);
     /*var serialPort = new SerialPort(connection, { baudRate });
     var rfid = new pn532.PN532(serialPort);
     rfid.on('ready', function () {
