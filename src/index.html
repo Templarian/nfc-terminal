@@ -36,6 +36,8 @@
     <div id="endpoints">
         <button data-endpoint="firmware">Firmware</button>
         <button data-endpoint="read">Read</button>
+        <button data-endpoint="mock">Mock</button>
+        <button data-endpoint="write">Write</button>
     </div>
     <script>
         const endpoints = document.getElementById('endpoints');
@@ -49,6 +51,39 @@
                 case 'read':
                     fetch('/read').then((data) => {
                         console.log(data);
+                    });
+                    break;
+                case 'mock':
+                    fetch('/assets/mock/read')
+                        .then((req) => {
+                            return req.blob();
+                        })
+                        .then((blob) => {
+                            return blob.arrayBuffer();
+                        })
+                        .then((arrayBuffer) => {
+                            const arr = Array.from(new Uint8Array(arrayBuffer));
+                            return arr.map(x => String.fromCodePoint(x));
+                        })
+                        .then((body) => {
+                            console.log(body);
+                        });
+                    break;
+                case 'write':
+                    fetch('/write', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify([
+                            'text',
+                            '42',
+                            '2021-05-09T19:31:31Z',
+                            '2021-05-09T19:31:31Z',
+                            `Hello World!`
+                        ])
+                    }).then(() => {
+                        alert('write');
                     });
                     break;
             }

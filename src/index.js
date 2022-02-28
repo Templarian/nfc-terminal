@@ -27,8 +27,8 @@ app.get('/read', (req, res) => {
 });
 
 app.post('/write', (req, res) => {
-  const value = req.body;
-  write(value).then((data) => {
+  const records = req.body;
+  write(records).then((data) => {
     res.json(data);
   });
 });
