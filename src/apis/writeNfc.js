@@ -47,7 +47,7 @@ function toData(records) {
             buffer.push(record.charCodeAt(i))
         }
     });
-    return buffer.forEach(code => String.fromCharCode(code)).join('');
+    return buffer.map(code => String.fromCharCode(code)).join('');
 }
 
 exports.write = function (records) {
