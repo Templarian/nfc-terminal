@@ -53,7 +53,8 @@ function toData(records) {
 exports.write = function (records) {
   return new Promise((resolve, reject) => {
     // create file
-    writeFileSync('write', toData(records));
+    const buffer = Buffer.from(toData(records));
+    writeFileSync('write', buffer);
     const stdout = execSync('mifare-desfire-write-ndef -i write -y');
     
     resolve(stdout);
