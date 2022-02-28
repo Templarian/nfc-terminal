@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 
 const { connection, baudRate } = require('./../config');
 
-// ndef
+// ndef Unknown
 const unknown = 5;
 
 function hex(d) {
@@ -25,7 +25,7 @@ function toData(records) {
             buffer.push(hex(`c${unknown}`));
         } else if (i === 0) {
             buffer.push(hex(`9${unknown}`));
-        } else if (count === i - 1) {
+        } else if (count === i + 1) {
             buffer.push(hex(`5${unknown}`));
         } else {
             buffer.push(hex(`1${unknown}`));
