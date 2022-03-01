@@ -38,6 +38,9 @@
         <button data-endpoint="read">Read</button>
         <button data-endpoint="mock">Mock</button>
         <button data-endpoint="write">Write</button>
+        <div>
+            <textarea id="write">Hello World!</textarea>
+        </div>
     </div>
     <script>
         const endpoints = document.getElementById('endpoints');
@@ -80,7 +83,7 @@
                             '42',
                             '2021-05-09T19:31:31Z',
                             '2021-05-09T19:31:31Z',
-                            `Hello World!`
+                            document.getElementById('write').value
                         ])
                     }).then(() => {
                         alert('write');
