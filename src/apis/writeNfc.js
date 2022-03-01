@@ -53,7 +53,7 @@ exports.write = function (records) {
       resolve(stdout.toString());
     } catch ({ stderr }) {
       resolve({
-        error: stderr.toString().replace(/\r/g, '');
+        error: stderr.toString().replace(/\r/g, '')
       });
     }
   });
