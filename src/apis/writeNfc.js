@@ -32,6 +32,9 @@ function toData(records) {
     const total = record.length;
     const overflow = Math.floor(total / 256);
     const length = total % 256;
+    if (overflow !== 0) {
+      buffer.push(0);
+    }
     buffer.push(overflow);
     buffer.push(length);
     // Write Record
