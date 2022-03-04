@@ -17,10 +17,6 @@
   },
   "homepage": "https://github.com/Templarian/nfc-terminal#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "ndef": "^0.2.0",
-    "open": "^8.0.6",
-    "pn532": "^1.0.0",
-    "serialport": "^9.0.7"
+    "express": "^4.17.1"
   }
 }
