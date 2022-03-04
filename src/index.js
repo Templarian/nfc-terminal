@@ -3,7 +3,12 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-const { firmware, read, write } = require('./apis');
+const {
+  firmware,
+  read,
+  write,
+  test
+} = require('./apis');
 
 // Parse JSON
 app.use(express.json({ strict: false }));
@@ -31,6 +36,15 @@ app.post('/write', (req, res) => {
   write(records).then((data) => {
     res.json(data);
   });
+});
+
+app.get('/test', (req, res) => {
+  try {
+    test();
+    res.json("Success");
+  } catch (error) {
+    res.json(error.message);
+  }
 });
 
 app.get('/firmware', (req, res) => {

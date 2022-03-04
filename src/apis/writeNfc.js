@@ -7,18 +7,27 @@ const tnf = UNKNOWN;
 // id length (not used)
 const IL = '0';
 
-// c5 95 55 15
+// c5 95 15 55
+
+function getHeader(i, count, length) {
+  // Begin
+  const MB = i === 0 ? '1' : '0';
+  // End
+  const ME = count === i + 1 ? '1' : '0';
+  // Fragment
+  const CF = '0';
+  // Length
+  const overflow = Math.floor(length / 256);
+  // Short Record
+  const SR = overflow === 0 ? '1' : '0';
+  // Combined
+  return parseInt(`${MB}${ME}${CF}${SR}${IL}${tnf}`, 2);
+}
 
 function toData(records) {
   const buffer = [];
   const count = records.length;
   records.forEach((record, i) => {
-    // Begin
-    const MB = i === 0 ? '1' : '0';
-    // End
-    const ME = count === i + 1 ? '1' : '0';
-    // Fragment
-    const CF = count !== i + 1 ? '1' : '0';
     // Length
     const total = record.length;
     const overflow = Math.floor(total / 256);
@@ -26,7 +35,7 @@ function toData(records) {
     // Short Record
     const SR = overflow === 0 ? '1' : '0';
     // Combined
-    const binary = parseInt(`${MB}${ME}${CF}${SR}${IL}${tnf}`, 2);
+    const binary = getHeader(i, count, total);
     buffer.push(binary);
     // Type Length (not used for binary data)
     buffer.push(0);
@@ -63,3 +72,32 @@ exports.write = function (records) {
     }
   });
 };
+
+exports.test = function () {
+  // Short Record = 1
+  if (getHeader(0, 5, 14) !== 149) { // 95
+    throw new Error('Invalid begin record (SR = 1)');
+  }
+  if (getHeader(1, 5, 14) !== 21) { // 15
+    throw new Error('Invalid middle record (SR = 1)');
+  }
+  if (getHeader(4, 5, 14) !== 85) { // 55
+    throw new Error('Invalid end record (SR = 1)');
+  }
+  if (getHeader(0, 1, 14) !== 213) { // D5
+    throw new Error('Invalid single record (SR = 1)');
+  }
+  // Short Record = 0
+  if (getHeader(0, 5, 256) !== 165) { // A5
+    throw new Error('Invalid begin record (SR = 0)');
+  }
+  if (getHeader(1, 5, 256) !== 37) { // 25
+    throw new Error('Invalid middle record (SR = 0)');
+  }
+  if (getHeader(4, 5, 256) !== 101) { // 65
+    throw new Error('Invalid end record (SR = 0)');
+  }
+  if (getHeader(0, 1, 256) !== 197) { // C5
+    throw new Error('Invalid single record (SR = 0)');
+  }
+}
