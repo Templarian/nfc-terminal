@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Terminal</title>
     <style>
         body {
             margin: 0;
@@ -34,7 +35,6 @@
         <textarea rows="10" cols="60" id="textarea"></textarea>
     </div>
     <div id="endpoints">
-        <button data-endpoint="firmware">Firmware</button>
         <button data-endpoint="read">Read</button>
         <button data-endpoint="mock">Mock</button>
         <button data-endpoint="write">Write</button>
@@ -47,15 +47,13 @@
         const endpoints = document.getElementById('endpoints');
         endpoints.addEventListener('click', (e) => {
             switch(e.target.dataset.endpoint) {
-                case 'firmware':
-                    fetch('/firmware').then((data) => {
-                        console.log(data);
-                    });
-                    break;
                 case 'read':
-                    fetch('/read').then((data) => {
-                        console.log(data);
-                    });
+                    fetch('/read')
+                        .then((req) => {
+                            return req.json();
+                        }).then((data) => {
+                            console.log(data);
+                        });
                     break;
                 case 'mock':
                     fetch('/assets/mock/read')

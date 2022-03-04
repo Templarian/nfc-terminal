@@ -22,6 +22,9 @@ function getHeader(i, count, length) {
     return parseInt(`${MB}${ME}${CF}${SR}${IL}${tnf}`, 2);
 }
 
+/**
+ * String[] -> NDef Records
+ */
 function toData(records) {
     const buffer = [];
     const count = records.length;
@@ -32,9 +35,9 @@ function toData(records) {
         const length = total % 256;
         // Short Record
         const SR = overflow === 0 ? '1' : '0';
-        // Combined
-        const binary = getHeader(i, count, total);
-        buffer.push(binary);
+        // Message Prefix
+        const prefix = getHeader(i, count, total);
+        buffer.push(prefix);
         // Type Length (not used for binary data)
         buffer.push(0);
         if (SR === '1') {
@@ -58,7 +61,7 @@ function toData(records) {
 
 exports.write = function (records) {
     return new Promise((resolve, reject) => {
-        // create file
+        // Write NFC data to "write" file
         writeFileSync('write', toData(records), { encoding: 'binary' });
         try {
             const stdout = execSync('mifare-desfire-write-ndef -i write -y');

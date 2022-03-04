@@ -4,7 +4,6 @@ const app = express();
 const port = 3000;
 
 const {
-  firmware,
   read,
   write,
   test
@@ -45,12 +44,6 @@ app.get('/test', (req, res) => {
   } catch (error) {
     res.json(error.message);
   }
-});
-
-app.get('/firmware', (req, res) => {
-  firmware().then((data) => {
-    res.json(data);
-  });
 });
 
 app.listen(port, () => {
