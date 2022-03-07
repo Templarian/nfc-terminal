@@ -22,10 +22,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/poll', (req, res) => {
-  res.send('Hello World!');
-});
-
 app.get('/read', (req, res) => {
   read().then((data) => {
     res.json(data);
