@@ -6,7 +6,9 @@ const port = 3000;
 const {
   read,
   write,
-  test
+  test,
+  getTemp,
+  poll
 } = require('./apis');
 
 // Parse JSON
@@ -35,6 +37,23 @@ app.post('/write', (req, res) => {
   write(records).then((data) => {
     res.json(data);
   });
+});
+
+app.get('/poll', (req, res) => {
+  try {
+    poll();
+    res.json("Success");
+  } catch (error) {
+    res.json(error.message);
+  }
+});
+
+app.get('/temp', (req, res) => {
+  try {
+    res.json(getTemp());
+  } catch (error) {
+    res.json(error.message);
+  }
 });
 
 app.get('/test', (req, res) => {

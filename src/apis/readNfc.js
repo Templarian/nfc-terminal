@@ -62,7 +62,7 @@ exports.read = function () {
                 });
             }
             resolve({
-                error: stderr.toString().replace(/\r/g, '')
+                error: message
             });
         }
     });

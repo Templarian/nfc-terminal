@@ -95,6 +95,20 @@
                         alert(body);
                     });
                     break;
+                case 'poll':
+                    fetch('/poll').then((req) => {
+                        return req.json();
+                    }).then((body) => {
+                        alert(body);
+                    });
+                    break;
+                case 'temp':
+                    fetch('/temp').then((req) => {
+                        return req.json();
+                    }).then((body) => {
+                        alert(body);
+                    });
+                    break;
             }
         })
     </script>
