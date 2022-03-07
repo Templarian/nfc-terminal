@@ -50,28 +50,32 @@
         endpoints.addEventListener('click', (e) => {
             switch(e.target.dataset.endpoint) {
                 case 'read':
-                    fetch('/read')
-                        .then((req) => {
-                            return req.json();
-                        }).then((data) => {
-                            console.log(data);
-                        });
+                    fetch('/read', {
+                        cache: 'no-cache'
+                    })
+                    .then((req) => {
+                        return req.json();
+                    }).then((data) => {
+                        console.log(data);
+                    });
                     break;
                 case 'mock':
-                    fetch('/assets/mock/read')
-                        .then((req) => {
+                    fetch('/assets/mock/read', {
+                        cache: 'no-cache'
+                    })
+                    .then((req) => {
                             return req.blob();
-                        })
-                        .then((blob) => {
-                            return blob.arrayBuffer();
-                        })
-                        .then((arrayBuffer) => {
-                            const arr = Array.from(new Uint8Array(arrayBuffer));
-                            return arr.map(x => String.fromCodePoint(x));
-                        })
-                        .then((body) => {
-                            console.log(body);
-                        });
+                    })
+                    .then((blob) => {
+                        return blob.arrayBuffer();
+                    })
+                    .then((arrayBuffer) => {
+                        const arr = Array.from(new Uint8Array(arrayBuffer));
+                        return arr.map(x => String.fromCodePoint(x));
+                    })
+                    .then((body) => {
+                        console.log(body);
+                    });
                     break;
                 case 'write':
                     fetch('/write', {
@@ -79,6 +83,7 @@
                         headers: {
                             'Content-Type': 'application/json'
                         },
+                        cache: 'no-cache',
                         body: JSON.stringify([
                             'text',
                             '42',
@@ -86,28 +91,41 @@
                             '2021-05-09T19:31:31Z',
                             document.getElementById('write').value
                         ])
-                    }).then(() => {
+                    })
+                    .then(() => {
                         alert('write');
                     });
                     break;
                 case 'test':
-                    fetch('/test').then((req) => {
+                    fetch('/test', {
+                        cache: 'no-cache'
+                    })
+                    .then((req) => {
                         return req.json();
-                    }).then((body) => {
+                    })
+                    .then((body) => {
                         alert(body);
                     });
                     break;
                 case 'poll':
-                    fetch('/poll').then((req) => {
+                    fetch('/poll', {
+                        cache: 'no-cache'
+                    })
+                    .then((req) => {
                         return req.json();
-                    }).then((body) => {
+                    })
+                    .then((body) => {
                         alert(body);
                     });
                     break;
                 case 'temp':
-                    fetch('/temp').then((req) => {
+                    fetch('/temp', {
+                        cache: 'no-cache'
+                    })
+                    .then((req) => {
                         return req.json();
-                    }).then((body) => {
+                    })
+                    .then((body) => {
                         alert(body);
                     });
                     break;
