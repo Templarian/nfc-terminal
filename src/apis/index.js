@@ -1,7 +1,7 @@
 const { read, test: testRead } = require('./readNfc');
 const { write, test: testWrite } = require('./writeNfc');
 const { poll } = require('./pollNfc');
-const { getTemp } = require('./hardware');
+const { getTemp, blink } = require('./hardware');
 
 exports.read = read;
 exports.write = write;
@@ -12,4 +12,5 @@ exports.getTemp = getTemp;
 exports.test = function () {
     testRead();
     testWrite();
+    blink(17);
 };
