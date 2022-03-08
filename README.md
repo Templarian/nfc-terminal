@@ -20,33 +20,36 @@
 - Raspberry Pi Zero 2 W
 - PN532 Chip
   - https://www.amazon.com/gp/product/B01I1J17LC/
-  - You do need to solder the 4 pins to the board.
-  - UART works best as the node-i2c library is not complete
 - 1024x768 8" HDMI Non-Touch Display.
   - https://chicagodist.com/products/hdmi-8-ips-lcd-screen-kit-1024x768
+  - https://www.adafruit.com/product/4338
 - MIFARE DESFire EV1 2k/4k/8k Fobs
   - https://www.amazon.com/gp/product/B07D925N54/
-  - Not using security stuff, but EV2 would work also.
+  - EV1 or EV2, no security features are used.
 
 ## Software
 
-Really tried to keep this as basic as possible.
 - Express for handling requests.
-- Plain HTML + JS + CSS... one `index.html` file.
-- `Consolas` is assumed to be installed.
+- HTML Canvas + JS
+- Will try to use `Consolas` font if found.
 
 ## NFC Lifecycle
 
-- LED Off
+- LED (5 Brightness)
 - Ready
   - Cartridge slot LED Solid
   - Wait for cartridge
     - Cartridge Inserted
       - Cartridge slot LED Pulses
       - Read cartridge data
-      - Data modification is written
+        - Process Data
+      - Data Modified
+        - Write Data
+        - LED (255 Brightness)
     - Cartridge Removed
   - Repeat Wait for Cartridge
+- Error
+  - Logo Red
 
 ## Data
 
@@ -55,12 +58,12 @@ All records must exist for the cartridge to be properally read.
 > All 5 records are written in order.
 
 - Type
-  - `text`
+  - `text`, `javascript`
 - Total Writes
   - `42`
-- Created Date (20 chars)
+- Created Date
   - `2021-05-09T19:31:31Z`
-- Modified Date (20 chars)
+- Modified Date
   - `2021-05-09T19:31:31Z`
-- Text (~2k/4k/8k minus 70 chars)
+- Text (~2k/4k/8k minus)
   - All text data.
