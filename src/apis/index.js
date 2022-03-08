@@ -12,5 +12,5 @@ exports.getTemp = getTemp;
 exports.test = function () {
     testRead();
     testWrite();
-    blink(17);
+    blink(11);
 };
