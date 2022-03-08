@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-const { promise: gpiop } = require('rpi-gpio');
+const gpiop = require('rpi-gpio').promise;
 
 exports.getTemp = function () {
     const stdout = execSync('vcgencmd measure_temp');
