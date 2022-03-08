@@ -8,7 +8,8 @@ const {
   write,
   test,
   getTemp,
-  poll
+  poll,
+  setLed
 } = require('./apis');
 
 // Parse JSON
@@ -20,6 +21,10 @@ app.use('/modules', express.static('src/modules'));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.get('/led/:value', (req, res) => {
+  setLed(parseInt(req.params.value, 10));
 });
 
 app.get('/read', (req, res) => {

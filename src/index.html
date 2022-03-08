@@ -44,8 +44,20 @@
         <div>
             <textarea id="write">Hello World!</textarea>
         </div>
+        <input type="slider" min="0" max="255" value="0" id="slider" />
     </div>
     <script>
+        const slider = document.getElementById('slider');
+        slider.onchange = function (e) {
+            fetch(`/led/${e.target.value}`, {
+                cache: 'no-cache'
+            })
+            .then((req) => {
+                return req.json();
+            }).then((data) => {
+                console.log(data);
+            });
+        };
         const endpoints = document.getElementById('endpoints');
         endpoints.addEventListener('click', (e) => {
             switch(e.target.dataset.endpoint) {

@@ -48,5 +48,10 @@ exports.blink = function (pin) {
     }, 2000)*/
 };
 
+exports.setLed = function (value) {
+    const led = new Gpio(11, { mode: Gpio.OUTPUT });
+    led.pwmWrite(value);
+};
+
 exports.on = on;
 exports.off = off;
