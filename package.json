@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Templarian/nfc-terminal#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "pigpio": "^3.3.1",
     "rpi-gpio": "^2.1.7"
   }
 }

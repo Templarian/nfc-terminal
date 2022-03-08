@@ -1,5 +1,6 @@
 const { execSync } = require('child_process');
 const gpiop = require('rpi-gpio').promise;
+const Gpio = require('pigpio').Gpio;
 
 exports.getTemp = function () {
     const stdout = execSync('vcgencmd measure_temp');
@@ -28,10 +29,23 @@ function off(pin) {
 }
 
 exports.blink = function (pin) {
-    on(pin);
+    const led = new Gpio(pin, { mode: Gpio.OUTPUT });
+
+    let dutyCycle = 0;
+
+    setInterval(() => {
+        led.pwmWrite(dutyCycle);
+
+        dutyCycle += 5;
+        if (dutyCycle > 255) {
+            dutyCycle = 0;
+        }
+    }, 20);
+
+    /*on(pin);
     setTimeout(() => {
         off(pin);
-    }, 2000)
+    }, 2000)*/
 };
 
 exports.on = on;
