@@ -13,5 +13,5 @@ exports.setLed = setLed;
 exports.test = function () {
     testRead();
     testWrite();
-    blink(11);
+    blink(17);
 };
