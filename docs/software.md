@@ -19,6 +19,8 @@ With global helper methods.
 text(10, 10, 'Hello World!', 10, 10);
 ```
 
+[hello_world.js](examples/hello_world.js)
+
 ## Helper
 
 ### Properties
