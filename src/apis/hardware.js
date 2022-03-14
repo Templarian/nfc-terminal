@@ -1,5 +1,4 @@
 const { execSync } = require('child_process');
-const gpiop = require('rpi-gpio').promise;
 const Gpio = require('pigpio').Gpio;
 
 exports.getTemp = function () {
@@ -8,27 +7,7 @@ exports.getTemp = function () {
     return temp;
 };
 
-function on(pin) {
-    gpiop.setup(pin, gpiop.DIR_OUT)
-        .then(() => {
-            return gpiop.write(pin, true);
-        })
-        .catch((err) => {
-            console.log('Error: ', err.toString())
-        });
-}
-
-function off(pin) {
-    gpiop.setup(pin, gpiop.DIR_OUT)
-        .then(() => {
-            return gpiop.write(pin, false);
-        })
-        .catch((err) => {
-            console.log('Error: ', err.toString())
-        });
-}
-
-exports.blink = function (pin) {
+exports.pulseLed = function (pin) {
     const led = new Gpio(pin, { mode: Gpio.OUTPUT });
 
     let dutyCycle = 0;
@@ -41,18 +20,15 @@ exports.blink = function (pin) {
             dutyCycle = 0;
         }
     }, 20);
-
-    /*on(pin);
-    setTimeout(() => {
-        off(pin);
-    }, 2000)*/
 };
 
-exports.setLed = function (value) {
-    // Was 17
-    const led = new Gpio(16, { mode: Gpio.OUTPUT });
+exports.setLed = function (pin, value) {
+    if (isNaN(level)) {
+        throw `LED level must be a number.`;
+    }
+    if (!(level >= 0 && level <= 255)) {
+        throw `LED level must be between 0 and 255.`;
+    }
+    const led = new Gpio(pin, { mode: Gpio.OUTPUT });
     led.pwmWrite(value);
 };
-
-exports.on = on;
-exports.off = off;

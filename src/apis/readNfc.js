@@ -74,5 +74,4 @@ exports.test = function () {
     if (records.length !== 5) {
         throw new Error(JSON.stringify(records));
     }
-
 }

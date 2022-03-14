@@ -1,3 +1,5 @@
+import { Key } from './utils'
+
 // Documented in software.md
 export default function(terminal) {
     const {
@@ -12,6 +14,7 @@ export default function(terminal) {
         canvas,
         width,
         height,
+        Key,
         clear: () => {
             canvas.fillStyle = colorBackground;
             canvas.fillRect(
@@ -35,6 +38,9 @@ export default function(terminal) {
             '(async () => {',
             'const {',
             '    canvas,',
+            '    width,',
+            '    height,',
+            '    Key,',
             '    clear,',
             '    wait',
             '} = this;',

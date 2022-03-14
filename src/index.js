@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/led/:value', (req, res) => {
-  setLed(parseInt(req.params.value, 10));
+  setLed(16, parseInt(req.params.value, 10));
   res.json({ message: `success ${req.params.value}` })
 });
 

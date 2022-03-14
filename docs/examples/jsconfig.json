@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noLib": true,
+    "paths": {
+      "terminal": [
+        "./../../src/modules/types/utils/index"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

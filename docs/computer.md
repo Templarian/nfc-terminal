@@ -1,6 +1,6 @@
 # Computer
 
-This guide will step you through building the computer.
+This guide will step you through building the computer terminal.
 
 ## Raspberry Pi OS
 
@@ -41,5 +41,10 @@ $ sudo apt-get install -y nodejs
 ## Wire Diagram
 
 4 Cables to required to...
+
+## Starting the Server
+
+- `npm start` - On Raspberry Pi
+- `npm run dev` - Off Device
 
 ## 3D Print Computer Case
