@@ -5,3 +5,9 @@ Q. Why?
 
 Q. Total Cost
 > A. TBD
+
+Q. I've built one now what?
+> ???
+
+Q. `sudo node ./src/index.js`, why sudo?
+> Required for `pigpio` dependency.

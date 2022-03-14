@@ -1,5 +1,6 @@
 {
   "name": "nfc-terminal",
+  "private": true,
   "version": "1.0.0",
   "description": "Vintage NFC Terminal for 1024x768 Display + Raspberry Pi Zero 2 + PN532",
   "main": "src/index.js",
