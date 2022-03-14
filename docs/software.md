@@ -1,8 +1,6 @@
 # Software
 
-> Note: 
-
-Goal: Write your own software. Full JavaScript or write simple applications with helper functions.
+Goal: Develop applications that can be written to a cartridge.
 
 ## Sample App
 
@@ -16,7 +14,7 @@ canvas.fillText('Hello World!', 10, 10);
 With global helper methods.
 
 ```javascript
-text(10, 10, 'Hello World!', 10, 10);
+text(10, 10, 'Hello World!');
 ```
 
 [hello_world.js](examples/hello_world.js)
@@ -28,6 +26,7 @@ text(10, 10, 'Hello World!', 10, 10);
 Several basic properties are provided.
 
 | Property | Description |
+|----------|-------------|
 | `canvas` | Canvas Context |
 | `width`  | Width |
 | `height` | Height |
@@ -41,6 +40,7 @@ Several basic properties are provided.
 Many helper methods are provided for quicker coding of applications.
 
 | Method | Description |
+|--------|-------------|
 | `log(message)` | Log to console |
 | `clear(color = background)` | Clear canvas |
 | `text(x, y, text, color = foreground)` | Draw Text |
