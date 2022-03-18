@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "sudo node ./src/index.js",
-    "dev": "node ./src/index.js"
+    "dev": "node ./src/index.js --mode=dev"
   },
   "repository": {
     "type": "git",

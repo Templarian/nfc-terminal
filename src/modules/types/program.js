@@ -1,4 +1,4 @@
-import { Key } from './utils'
+import { Key } from './utils/key.js';
 
 // Documented in software.md
 export default function(terminal) {
@@ -15,6 +15,10 @@ export default function(terminal) {
         width,
         height,
         Key,
+        text: (x, y, text, color = colorForeground) => {
+            canvas.fillStyle = color;
+            canvas.fillText(text, x, y);
+        },
         clear: () => {
             canvas.fillStyle = colorBackground;
             canvas.fillRect(
@@ -25,7 +29,7 @@ export default function(terminal) {
             );
             canvas.fillStyle = colorForeground;
         },
-        wait: (milliseconds) => {
+        delay: (milliseconds) => {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve();
@@ -41,8 +45,9 @@ export default function(terminal) {
             '    width,',
             '    height,',
             '    Key,',
+            '    text,',
             '    clear,',
-            '    wait',
+            '    delay',
             '} = this;',
             '// Clear Canvas',
             'clear();',

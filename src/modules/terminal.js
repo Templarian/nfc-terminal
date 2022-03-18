@@ -23,6 +23,13 @@ export default class Terminal {
         this.loadAssets();
     }
 
+    /**
+     * Focus trap ensures inputs always have focus.
+     */
+    createFocusTrap(canvas) {
+
+    }
+
     get canvas() {
         return this.c;
     }
@@ -59,7 +66,7 @@ export default class Terminal {
         Promise.all(promises).then((data) => {
             this.isLoaded = true;
             this._assets = data;
-            this.render();
+            this.renderEmpty();
         });
     }
 
@@ -74,6 +81,9 @@ export default class Terminal {
             modified,
             text
         ] = records;
+        // Clear Arrow
+        clearInterval(this.arrowClearTimeout);
+        // Handle Types
         if (type in types) {
             this.type = type;
             this.created = created;
@@ -84,7 +94,7 @@ export default class Terminal {
                 module.default(this);
             });
         } else {
-            this.renderError(`Invalid type (records[1] = ${type})`);
+            this.renderError(`Invalid type (records[0] = ${type})`);
         }
     }
 

@@ -1,6 +1,6 @@
 # Software
 
-Goal: Develop applications that can be written to a cartridge.
+**Goal:** Develop applications that can be written to a cartridge.
 
 ## Sample App
 
@@ -48,3 +48,7 @@ Many helper methods are provided for quicker coding of applications.
 | `roundedRect(x, y, width, height, radius, color)` | Draw Rectangle |
 | `circle(x, y, radius)` | Draw Circle |
 | `key(key, callback)` | Handle Key |
+| `await write(key, value)` | Write key, value, null removes key |
+| `await read(key)` | Write key; return value |
+| `frames(callback)` | Call every frame. |
+| `await delay(ms)` | Wait milliseconds. |

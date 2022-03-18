@@ -1,4 +1,5 @@
 const express = require('express');
+const { param } = require('express/lib/request');
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -9,8 +10,12 @@ const {
   test,
   getTemp,
   poll,
-  setLed
+  setLed,
+  args,
+  getDevExamples,
+  getDevExampleByName
 } = require('./apis');
+const arg = args();
 
 // Parse JSON
 app.use(express.json({ strict: false }));
@@ -20,7 +25,12 @@ app.use('/assets', express.static('src/assets'));
 app.use('/modules', express.static('src/modules'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  const isProd = arg.mode === 'prod';
+  res.sendFile(
+    path.join(
+      `${__dirname}/${isProd ? 'index' : 'dev'}.html`
+    )
+  );
 });
 
 app.get('/led/:value', (req, res) => {
@@ -65,6 +75,19 @@ app.get('/test', (req, res) => {
   } catch (error) {
     res.json(error.message);
   }
+});
+
+app.get('/mode', (req, res) => {
+  // "prod" | "dev"
+  res.json(args().mode);
+});
+
+app.get('/examples', (req, res) => {
+  res.json(getDevExamples());
+});
+
+app.get('/example/:name', (req, res) => {
+  res.json(getDevExampleByName(req.params.name));
 });
 
 app.listen(port, () => {
